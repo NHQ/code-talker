@@ -1,0 +1,27 @@
+{
+  "name": "jsynth-script-node",
+  "version": "0.0.0",
+  "description": "DSP and live code editor in the browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/NHQ/jsynth-script-node.git"
+  },
+  "dependencies" : {
+    "diff" : "",
+    "store" : "",
+    "esprima" : "",
+    "extend" :  "",
+    "codemirror" : "",
+    "oscillators" : "",
+    "amod" : "",
+    "javascript-editor" : "https://github.com/NHQ/javascript-editor/tarball/master"
+  },
+  "author": "johnnyscript.us and friends",
+  "license": "KITTEN",
+  "readmeFilename": "README.markdown",
+  "gitHead": "c4ad1f4296e359e6374633ed741f12eb243d09ed"
+}

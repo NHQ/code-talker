@@ -1,0 +1,5 @@
+// This is your code editor
+// the other is your partners
+// you have identical interfaces
+// all code is synced between partners
+// you can delete these comments 
