@@ -14,7 +14,7 @@ var WebSocketServer = require('ws').Server
 var websocketStream = require('websocket-stream')
 var wss = new WebSocketServer({noServer: true})
 
-var db = sublevel(level('./data/tmpdbx'))
+var db = sublevel(level('./data'))
 
 var year = 1000 * 60 * 60 * 24 * 365
 
