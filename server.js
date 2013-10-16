@@ -103,3 +103,4 @@ server.on('upgrade', function(req, socket, head){
 })
 
 server.listen(11010)
+console.log('GOTO http://localhost:11010')
