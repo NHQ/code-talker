@@ -1,17 +1,9 @@
 var Editor = require('javascript-editor');
 var Emitter = require('events').EventEmitter
 var fs = require('fs');
-var diff = window.diff = require('diff');
 var store = window.store = require('store');
-var diffs = [];
 var txt = fs.readFileSync('./self.txt');
-var lastCompile = txt + '';
-var firstDifObject = {
-	diff: diff.createPatch('http://secret.synth.fm', '', lastCompile),
-	time: new Date().getTime()
-}
 
-diffs.push(firstDifObject)
 
 var s1 = fs.readFileSync('./css/codemirror.css');
 var s3 = fs.readFileSync('./css/style.css');
@@ -25,8 +17,6 @@ var css = s1 + s2 + s3;
     
     var emitter = new Emitter()
     
-    window.getDiffs = getDiffByIndex;
-
     var style = document.createElement('style');
     style.textContent = css;
     document.head.appendChild(style)
@@ -49,13 +39,6 @@ var css = s1 + s2 + s3;
     
     return {editor: ed, editor2: ed2, element: div, style: style}
         
-    function getDiffByIndex(index){
-      var str = '';
-      for(var x = 0; x < index; x++) {
-	str =	diff.applyPatch(str, diffs[x].diff)
-      }
-      return str
-    }
   }
 
 })(window, document)

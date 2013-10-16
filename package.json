@@ -11,6 +11,15 @@
     "url": "git://github.com/NHQ/jsynth-script-node.git"
   },
   "dependencies" : {
+	"levedown" :"",
+	"level-sublevel" : "",
+	"uuid" : "", 
+	"ecstatic" : "",
+	"levelup" :"",
+	"cookies" : "",
+	"keygrip" : "",
+	"ws" : "", 
+	"websocket-stream"  : "",
     "diff" : "",
     "store" : "",
     "esprima" : "",

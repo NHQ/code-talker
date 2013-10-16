@@ -1,5 +1,5 @@
 var websocket = require('websocket-stream')
-var stream = websocket('ws://'+window.location.host + window.location.pathname)
+var stream = websocket('ws://'+ window.location.host + window.location.pathname)
 
 module.exports = stream
 

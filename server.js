@@ -60,7 +60,7 @@ var server = http.createServer(function(req, res){
       _db = db.sublevel(session.id)
       _db.put('session', JSON.stringify(session))
       cookie.set('signed', session.id, {signed: true, expires: new Date(session.expires)})
-      console.log(session)
+//      console.log(session)
       res.writeHead(200, {"content-type" : "text/html"})
       fs.createReadStream('./public/index.html').pipe(res)
     }
@@ -78,7 +78,6 @@ var server = http.createServer(function(req, res){
 })
 
 server.on('upgrade', function(req, socket, head){
-  console.log(req.url);
   var cookie = new cookies(req, undefined, keygrip)
   var sessionID = cookie.get('signed', {signed: true});
   var _db, __db;
@@ -97,7 +96,6 @@ server.on('upgrade', function(req, socket, head){
 	stream.session = session
 	stream.pipe(stream)
 	stream.on('data', function(data){
-	  console.log(data)
 	})
       })
     })
