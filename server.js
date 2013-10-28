@@ -109,7 +109,7 @@ server.on('upgrade', function(req, socket, head){
 	for(s in paths[req.url]){
 		if(!(paths[req.url][s]._id === stream._id)){
 //			stream.pipe(paths[req.url][s]).pipe(stream)
-			stream.rstream.pipe(paths[req.url][s].rstream).pipe(stream.rstream)
+			stream.rstream.pipe(paths[req.url][s].rstream, {end: false}).pipe(stream.rstream, {end: false})
 		}
 	}
 	r.on('update', function(change){
