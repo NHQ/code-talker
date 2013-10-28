@@ -26,14 +26,14 @@ var css = s1 + s2 + s3;
     div.classList.add('left');
     document.body.appendChild(div);
 
-    var ed = Editor({ container: div, value: txt, updateInterval: Infinity, viewportMargin: Infinity})
+    var ed = Editor({ container: div, value: '', updateInterval: Infinity, viewportMargin: Infinity})
 
     var div2 = document.createElement('div');
     div2.classList.add('editor');
     div2.classList.add('right');
     document.body.appendChild(div2);
 
-    var ed2 = Editor({ container: div2, value: txt, updateInterval: Infinity, viewportMargin: Infinity, readOnly: true})
+    var ed2 = Editor({ container: div2, value: '', updateInterval: Infinity, viewportMargin: Infinity, readOnly: true})
 
 //    ed.editor.addKeyMap({'Shift-Enter': keyMap, 'Alt-Enter':keyMap, 'Cmd-Enter': keyMapLine})
     

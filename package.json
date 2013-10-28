@@ -28,6 +28,7 @@
     "oscillators" : "",
     "amod" : "",
 	"adiff" : "",
+	"r-array" : ""
     "javascript-editor" : "https://github.com/NHQ/javascript-editor/tarball/master"
   },
   "author": "johnnyscript.us and friends",

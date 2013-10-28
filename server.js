@@ -3,7 +3,8 @@ var parse = require('url').parse
 var qs = require('querystring')
 var http = require('http')
 var spawn = require('child_process').spawn
-
+var rarray = require('r-array')
+var diff = require('adiff')
 var level = require('levelup')
 var sublevel = require('level-sublevel')
 var uuid = require('uuid')
@@ -13,9 +14,9 @@ var keygrip = require('keygrip')(['catpile', 'doglight'])
 var WebSocketServer = require('ws').Server
 var websocketStream = require('websocket-stream')
 var wss = new WebSocketServer({noServer: true})
-
+var paths = {};
 var db = sublevel(level('./data'))
-
+var val = ''
 var year = 1000 * 60 * 60 * 24 * 365
 
 var opts = {
@@ -93,9 +94,44 @@ server.on('upgrade', function(req, socket, head){
       var q = qs.parse(parse(req.url).query);
       wss.handleUpgrade(req, socket, head, function(ws){
 	var stream = websocketStream(ws)
+	var r = new rarray()
+	stream._id = uuid.v4();
+	stream.rstream = r.createStream()
+	if(paths[req.url]) {
+		stream.write('##secondary')
+		
+		paths[req.url][stream._id] = stream
+	}
+	else{
+		paths[req.url] = {};
+		paths[req.url][stream._id] = stream
+	}
+	for(s in paths[req.url]){
+		if(!(paths[req.url][s]._id === stream._id)){
+//			stream.pipe(paths[req.url][s]).pipe(stream)
+			stream.rstream.pipe(paths[req.url][s].rstream).pipe(stream.rstream)
+		}
+	}
+	r.on('update', function(change){
+		console.log(change)
+	  var d = ''
+		for (var c in change){
+			console.log(change[c])
+			
+			d = diff.patch([val], [change[c]])
+			console.log(d)
+			val = d
+		}
+		stream.write(d[0])
+	})
 	stream.session = session
-	stream.pipe(stream)
-	stream.on('data', function(data){
+//	stream.pipe(stream)
+	stream.on('data', function(change){
+		data = JSON.parse(change)
+		var d = diff.diff([val], data)
+		d.forEach(function(e){
+			r.splice.apply(r, e)
+		})
 	})
       })
     })
