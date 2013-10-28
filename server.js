@@ -112,6 +112,7 @@ server.on('upgrade', function(req, socket, head){
 			stream.rstream.pipe(paths[req.url][s].rstream, {end: false}).pipe(stream.rstream, {end: false})
 		}
 	}
+	stream.on('error', function(){})
 	r.on('update', function(change){
 		console.log(change)
 	  var d = ''
@@ -122,7 +123,9 @@ server.on('upgrade', function(req, socket, head){
 			console.log(d)
 			val = d
 		}
-		stream.write(d[0])
+		try{
+			stream.write(d[0])			
+		}catch(err){}
 	})
 	stream.session = session
 //	stream.pipe(stream)
